@@ -5,7 +5,7 @@ from dash.exceptions import PreventUpdate
 
 import json
 
-from auth.auth import get_mapbox_token
+from auth import get_mapbox_token
 from functions import load_data, get_audio_features, country_geo_json, time_method
 from graph import get_map_figure, get_country_features_dist, get_country_features_barchart, get_country_features_ts
 from layout import get_layout

@@ -5,7 +5,7 @@ import pandas as pd
 
 from multiprocessing import Process, JoinableQueue
 
-from auth.auth import get_spotify_credentials
+from auth import get_spotify_credentials
 from database.tools import Database, handle_db
 from functions import time_method
 
