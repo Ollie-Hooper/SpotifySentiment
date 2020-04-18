@@ -88,8 +88,7 @@ def format_charts_df(df):
         return df.set_index('id')
 
 
-def init_charts_db(chart, time_frame):
-    t_name = f"{chart.replace(' ', '').lower()}_{time_frame[0]}"
+def init_charts_db(charts, time_frames):
     fields = {
         'id': 'text',
         'date': 'text',
@@ -101,7 +100,10 @@ def init_charts_db(chart, time_frame):
         'track_id': 'text'
     }
     with Database('charts') as charts_db:
-        charts_db.create(t_name, fields, 'id')
+        for chart in charts:
+            for time_frame in time_frames:
+                t_name = f"{chart.replace(' ', '').lower()}_{time_frame[0]}"
+                charts_db.create(t_name, fields, 'id')
 
 
 def download_chart(date, country, url, time_frame, chart_name):
