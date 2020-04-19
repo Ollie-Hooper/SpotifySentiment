@@ -12,8 +12,8 @@ country_meta = pd.read_csv('data/country_meta.csv')
 
 def get_graph_colours():
     return dict(
-        plot='#191414',  # plot='#181717',  # plot='#5c7791',
-        bg='#191414',  # bg='#181717',  # bg='#2b3e50',
+        plot='#002b36',  # plot='#181717',  # plot='#5c7791',
+        bg='#002b36',  # bg='#181717',  # bg='#2b3e50',
         text='#fff',  # text='#1DB954',
     )
 
@@ -21,7 +21,7 @@ def get_graph_colours():
 def default_graph_layout():
     graph_colours = get_graph_colours()
     return dict(
-        # margin=dict(l=20, r=20, t=0, b=30),
+        margin=dict(l=20, r=20, t=10, b=10),
         plot_bgcolor=graph_colours['plot'],
         paper_bgcolor=graph_colours['bg'],
         font=dict(
@@ -66,9 +66,12 @@ def get_country_features_ts(df, country='GBR'):
                 line=dict(color=v[1]),
             ) for f, v in features.items()
         ],
-        layout={
+        layout=dict(
             **default_graph_layout(),
-        }
+            legend=dict(
+                orientation='h'
+            )
+        )
     )
     return fig
 
@@ -85,7 +88,11 @@ def get_country_features_dist(df, country='GBR'):
                              histnorm='probability', show_hist=False,
                              show_rug=False)
     fig.update_layout(**default_graph_layout())
-    fig.update_layout(xaxis=dict(range=[0, 1]), yaxis=dict(showline=True, mirror=True))
+    fig.update_layout(
+        xaxis=dict(range=[0, 1], showline=True),
+        yaxis=dict(showline=True),
+        showlegend=False,
+    )
     return fig
 
 
@@ -105,6 +112,7 @@ def get_country_features_barchart(df, country='GBR'):
         ],
         layout={
             **default_graph_layout(),
+            'margin': dict(l=90, r=90),
         }
     )
     return fig
@@ -150,17 +158,20 @@ def get_map_layout():
 
     layout.update(dict(
         margin=dict(l=0, r=0, t=0, b=0),
+
+        plot_bgcolor='#21444a',
+        paper_bgcolor='#21444a',
         geo=dict(
             showframe=False,
             showcoastlines=True,
             showlakes=True,
-            lakecolor='#111',
+            lakecolor='#002b36',
             showocean=True,
-            oceancolor='#111',
+            oceancolor='#002b36',
             showland=True,
             landcolor='#333',
             showcountries=True,
-            bgcolor='#111',
+            bgcolor='#002b36',
             projection=dict(
                 scale=1.1
             )
