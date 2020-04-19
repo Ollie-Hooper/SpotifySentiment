@@ -19,7 +19,7 @@ def start_app():
         # viral50_d=load_data('Viral 50', 'daily')
     )
 
-    app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+    app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
 
     app.layout = get_layout(df['top200_w'])
 
@@ -30,16 +30,18 @@ def start_app():
     # mapbox_token = get_mapbox_token()
 
     @app.callback(
-        Output('map', 'figure'),
-        [Input('feature-dropdown', 'value')]
+        [Output('map', 'figure'),
+         Output('map-date', 'children')],
+        [Input('feature-dropdown', 'value'),
+         Input('map-slider', 'value')]
     )
     @time_method
-    def update_map(feature):
+    def update_map(feature, date_i):
         chart = 'Top 200'
         time_frame = 'weekly'
-        date = '26/03/2020'
+        date = df['top200_w'].date.unique()[date_i]
         fig = get_map_figure(df[f"{chart.replace(' ', '').lower()}_{time_frame[0]}"][df['top200_w']['date'] == date], feature=feature)
-        return fig
+        return fig, date[:-2]
 
     @app.callback(
         [Output('country', 'children'),
