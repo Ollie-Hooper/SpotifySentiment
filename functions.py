@@ -44,6 +44,7 @@ def load_data(chart, time_frame):
     scores_df = pd.merge(scores_df, country_meta[['name', 'iso3']], how='outer', left_index=True, right_index=True)
     scores_df.reset_index(inplace=True)
     scores_df['date'] = pd.to_datetime(scores_df['date'])
+    scores_df = scores_df.sort_values(by='date')
     scores_df['date'] = scores_df['date'].apply(lambda x: x.strftime('%d/%m/%Y'))
     return scores_df
 
