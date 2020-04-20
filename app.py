@@ -41,7 +41,7 @@ def start_app():
         time_frame = 'weekly'
         date = df['top200_w'].date.unique()[date_i]
         fig = get_map_figure(df[f"{chart.replace(' ', '').lower()}_{time_frame[0]}"][df['top200_w']['date'] == date], feature=feature)
-        return fig, date[:-2]
+        return fig, date[:-4] + date[-2:]
 
     @app.callback(
         [Output('country', 'children'),
