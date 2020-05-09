@@ -88,5 +88,8 @@ def get_country_description(df, country='GBR'):
             description = f'{adverb} {adjective}' if val > 0 else f'not {adverb} {adjective}'
             description = description.replace('  ', ' ').strip()
             descriptions.append(description)
-    description_string = ', '.join(descriptions).capitalize()
-    return description_string
+    if len(descriptions) == 0:
+        return 'Average'
+    else:
+        description_string = ', '.join(descriptions).capitalize()
+        return description_string
