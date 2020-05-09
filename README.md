@@ -1,7 +1,7 @@
 # Spotify Sentiment *by Ollie Hooper*  
   
 The aim of this project is to map and analyse the sentiments of different countries based on their music tastes over time.
-You can find a live version of the project [here]() and the source code is [here]().
+You can find a live version of the project [here]() and the source code is [here](https://github.com/Ollie-Hooper/SpotifySentiment).
   
 ## How it works  
   
