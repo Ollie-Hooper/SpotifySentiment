@@ -2,7 +2,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-from functions import get_audio_features
+from functions import get_audio_features, get_country_description
 from graph import get_map_figure, get_country_features_dist, get_country_features_ts, \
     get_country_features_barchart
 
@@ -31,7 +31,7 @@ def get_layout(df):
                 dbc.Card([
                     dbc.CardBody([
                         html.H1(id='country', children='United Kingdom'),
-                        html.P(id='country-description', className='lead'),
+                        html.P(id='country-description', className='lead', children=get_country_description(df)),
                         html.Hr(),
                         dbc.Row([
                             dbc.Col([

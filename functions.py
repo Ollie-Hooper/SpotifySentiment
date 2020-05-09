@@ -53,3 +53,40 @@ def country_geo_json(countries):
     for i in range(len(countries['features'])):
         countries['features'][i]['id'] = countries['features'][i]['properties']['iso_a3']
     return countries
+
+
+def get_country_description(df, country='GBR'):
+    adverbs = {
+        1: '',
+        2: 'quite',
+        3: 'very',
+        4: 'super',
+    }
+    audio_expressions = {
+        'valence': ['happy', 1],
+        'mode': ['moody', -1],
+        'energy': ['energetic', 1],
+        'danceability': ['dancy', 1],
+        'speechiness': ['speechy', 1],
+        'acousticness': ['acoustic', 1],
+        'instrumentalness': ['instrumental', 1],
+        'liveness': ['live', 1],
+    }
+    country_series = \
+        df.loc[df.date == df.date.unique()[-1]].loc[df.iso3 == country][
+            [f's_{f}' for f in audio_expressions.keys()]].iloc[0]
+    descriptions = []
+    for feature, (adjective, sign) in audio_expressions.items():
+        # adjective = audio_expressions[f][0]
+        # sign = audio_expressions[f][1]
+        val = country_series[f's_{feature}'] * sign
+        if abs(val) > 1:
+            adverb = ''
+            for level, a in adverbs.items():
+                if abs(val) > level:
+                    adverb = a
+            description = f'{adverb} {adjective}' if val > 0 else f'not {adverb} {adjective}'
+            description = description.replace('  ', ' ').strip()
+            descriptions.append(description)
+    description_string = ', '.join(descriptions).capitalize()
+    return description_string

@@ -6,7 +6,7 @@ from dash.exceptions import PreventUpdate
 import json
 
 from auth import get_mapbox_token
-from functions import load_data, get_audio_features, country_geo_json, time_method
+from functions import load_data, get_audio_features, country_geo_json, time_method, get_country_description
 from graph import get_map_figure, get_country_features_dist, get_country_features_barchart, get_country_features_ts
 from layout import get_layout
 
@@ -45,6 +45,7 @@ def start_app():
 
     @app.callback(
         [Output('country', 'children'),
+         Output('country-description', 'children'),
          Output('country-ts', 'figure'),
          Output('country-dist', 'figure'),
          Output('country-barchart', 'figure')],
@@ -55,7 +56,8 @@ def start_app():
             raise PreventUpdate()
         country_name = click['points'][0]['text']
         country_iso3 = click['points'][0]['location']
-        return country_name, get_country_features_ts(df['top200_w'], country_iso3), \
+        return country_name, get_country_description(df['top200_w'], country_iso3),\
+               get_country_features_ts(df['top200_w'], country_iso3), \
                get_country_features_dist(df['top200_w'], country_iso3), \
                get_country_features_barchart(df['top200_w'], country_iso3)
 
