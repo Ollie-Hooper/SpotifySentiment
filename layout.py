@@ -20,7 +20,7 @@ def get_layout(df):
                         dbc.Select(id='feature-dropdown',
                                    options=[{'label': v[0], 'value': k} for k, v in get_audio_features().items()],
                                    value='valence'),
-                        dbc.NavItem(dbc.NavLink('back', href=''))
+                        dbc.NavItem(dbc.NavLink('Ollie Hooper', href='https://ollie-hooper.github.io', target='_blank'))
                     ],
                     brand='Spotify Sentiment'
                 )
