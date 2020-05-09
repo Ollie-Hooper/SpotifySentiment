@@ -3,12 +3,9 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 from dash.exceptions import PreventUpdate
 
-import json
-
-from auth import get_mapbox_token
-from functions import load_data, get_audio_features, country_geo_json, time_method, get_country_description
-from graph import get_map_figure, get_country_features_dist, get_country_features_barchart, get_country_features_ts
-from layout import get_layout
+from app.functions import load_data, time_method, get_country_description
+from app.graph import get_map_figure, get_country_features_dist, get_country_features_barchart, get_country_features_ts
+from app.layout import get_layout
 
 
 def start_app():

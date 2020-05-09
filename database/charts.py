@@ -10,7 +10,7 @@ from lxml import html
 from multiprocessing import Process, JoinableQueue
 
 from database.tools import Database, handle_db
-from functions import time_method
+from app.functions import time_method
 
 t200_url = "https://spotifycharts.com/regional"
 v50_url = "https://spotifycharts.com/viral"

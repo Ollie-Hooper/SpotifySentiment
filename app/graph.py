@@ -1,11 +1,10 @@
 from datetime import datetime
 
 import plotly.graph_objects as go
-import plotly.express as px
 import plotly.figure_factory as ff
 import pandas as pd
 
-from functions import get_audio_features
+from app.functions import get_audio_features
 
 country_meta = pd.read_csv('data/country_meta.csv')
 

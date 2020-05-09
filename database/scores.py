@@ -1,7 +1,7 @@
 import pandas as pd
 
 from database.tools import Database, str_list
-from functions import time_method
+from app.functions import time_method
 
 audio_features = ['danceability', 'energy', 'key', 'loudness', 'mode', 'speechiness', 'acousticness',
                   'instrumentalness', 'liveness', 'valence', 'tempo', 'duration_ms', 'time_signature']

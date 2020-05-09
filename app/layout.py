@@ -2,8 +2,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-from functions import get_audio_features, get_country_description
-from graph import get_map_figure, get_country_features_dist, get_country_features_ts, \
+from app.functions import get_audio_features, get_country_description
+from app.graph import get_map_figure, get_country_features_dist, get_country_features_ts, \
     get_country_features_barchart
 
 graph_config = {

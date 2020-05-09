@@ -7,7 +7,7 @@ from multiprocessing import Process, JoinableQueue
 
 from auth import get_spotify_credentials
 from database.tools import Database, handle_db
-from functions import time_method
+from app.functions import time_method
 
 
 def init_tracks_db():
