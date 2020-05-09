@@ -17,9 +17,6 @@ def get_layout(df):
             dbc.Col([
                 dbc.NavbarSimple(
                     [
-                        dbc.Select(id='feature-dropdown',
-                                   options=[{'label': v[0], 'value': k} for k, v in get_audio_features().items()],
-                                   value='valence'),
                         dbc.NavItem(dbc.NavLink('Ollie Hooper', href='https://ollie-hooper.github.io', target='_blank'))
                     ],
                     brand='Spotify Sentiment'
@@ -57,6 +54,12 @@ def get_layout(df):
                         dcc.Graph(id='map', figure=get_map_figure(df), config=graph_config),
                         dbc.Row([
                             dbc.Col([
+                                dbc.Select(id='feature-dropdown',
+                                           options=[{'label': v[0], 'value': k} for k, v in
+                                                    get_audio_features().items()],
+                                           value='valence')
+                            ], width=2),
+                            dbc.Col([
                                 dcc.Slider(
                                     id='map-slider',
                                     min=0,
@@ -68,7 +71,7 @@ def get_layout(df):
                                     included=False,
                                     updatemode='drag',
                                 )
-                            ], width=10),
+                            ], width=8),
                             dbc.Col([
                                 html.H3(id='map-date')
                             ], width=2)
