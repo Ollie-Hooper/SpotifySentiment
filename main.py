@@ -17,7 +17,7 @@ def start_app():
     )
 
     app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
-
+    app.title = 'Spotify Sentiment'
     app.layout = get_layout(df['top200_w'])
 
     @app.callback(
