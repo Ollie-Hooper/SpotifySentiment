@@ -17,10 +17,13 @@ v50_url = "https://spotifycharts.com/viral"
 
 
 @time_method
-def run_charts_db(chart='Top 200', time_frame='weekly'):
+def run_charts_db(chart='Top 200', time_frame='weekly', n_dates=None):
     n_processes = os.cpu_count()
 
     dates = get_dates(chart, time_frame)
+
+    if n_dates:
+        dates = dates[:n_dates]
 
     date_count = len(dates)
 
