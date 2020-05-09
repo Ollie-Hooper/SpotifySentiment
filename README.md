@@ -17,7 +17,7 @@ Raw scores for each audio feature are calculated by the mean value of all the tr
 
 **Data Visualisation**  
 The data is visualised in 5 different ways:
-* **Map** - A choropleth map visualises the z-scores for a singular audio feature at one point in time (default latest). The audio feature can be selected from the dropdown on the navbar and the week can be changed using the slider. Countries can be selected by clicking on them.
+* **Map** - A choropleth map visualises the z-scores for a singular audio feature at one point in time (default latest). The audio feature that is mapped can be selected from the dropdown and the week can be changed using the slider. Countries can be selected by clicking on them.
 * **Country specific**  
   * **Description** - A dynamic description of the current sentiment of the country relative to their history is displayed below the country name.
   * **Profile** - A polar histogram plots the mean raw score normalised against every other country for every audio feature. Therefore a 1 indicates it has the highest audio feature score and 0 the lowest.
