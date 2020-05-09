@@ -21,7 +21,7 @@ def get_graph_colours():
 def default_graph_layout():
     graph_colours = get_graph_colours()
     return dict(
-        margin=dict(l=20, r=20, t=10, b=10),
+        margin=dict(l=20, r=20, t=50, b=10),
         plot_bgcolor=graph_colours['plot'],
         paper_bgcolor=graph_colours['bg'],
         font=dict(
@@ -70,7 +70,8 @@ def get_country_features_ts(df, country='GBR'):
             **default_graph_layout(),
             legend=dict(
                 orientation='h'
-            )
+            ),
+            title='Z-Score Audio Feature Time Series',
         )
     )
     return fig
@@ -92,6 +93,7 @@ def get_country_features_dist(df, country='GBR'):
         xaxis=dict(range=[0, 1], showline=True),
         yaxis=dict(showline=True),
         showlegend=False,
+        title='Audio Feature Distribution',
     )
     return fig
 
@@ -113,6 +115,7 @@ def get_country_features_barchart(df, country='GBR'):
         layout={
             **default_graph_layout(),
             'margin': dict(l=90, r=90),
+            'title': 'Audio Feature Profile',
         }
     )
     return fig
