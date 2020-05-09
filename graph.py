@@ -172,7 +172,7 @@ def get_map_layout():
             showocean=True,
             oceancolor='#002b36',
             showland=True,
-            landcolor='#333',
+            landcolor='#233',
             showcountries=True,
             bgcolor='#002b36',
             projection=dict(
