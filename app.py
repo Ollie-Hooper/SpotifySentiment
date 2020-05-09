@@ -23,12 +23,6 @@ def start_app():
 
     app.layout = get_layout(df['top200_w'])
 
-    # countries = country_geo_json(json.load(open('./data/countries.geo.json')))
-
-    # features_dict = get_audio_features()
-
-    # mapbox_token = get_mapbox_token()
-
     @app.callback(
         [Output('map', 'figure'),
          Output('map-date', 'children')],

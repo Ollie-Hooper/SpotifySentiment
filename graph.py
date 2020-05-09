@@ -12,9 +12,9 @@ country_meta = pd.read_csv('data/country_meta.csv')
 
 def get_graph_colours():
     return dict(
-        plot='#002b36',  # plot='#181717',  # plot='#5c7791',
-        bg='#002b36',  # bg='#181717',  # bg='#2b3e50',
-        text='#fff',  # text='#1DB954',
+        plot='#002b36',
+        bg='#002b36',
+        text='#fff',
     )
 
 

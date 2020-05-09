@@ -77,8 +77,6 @@ def get_country_description(df, country='GBR'):
             [f's_{f}' for f in audio_expressions.keys()]].iloc[0]
     descriptions = []
     for feature, (adjective, sign) in audio_expressions.items():
-        # adjective = audio_expressions[f][0]
-        # sign = audio_expressions[f][1]
         val = country_series[f's_{feature}'] * sign
         if abs(val) > 1:
             adverb = ''
