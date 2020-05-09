@@ -17,7 +17,7 @@ v50_url = "https://spotifycharts.com/viral"
 
 
 @time_method
-def run_charts_db(chart='Top 200', time_frame='weekly', n_dates=None):
+def run_charts_db(chart='Top 200', time_frame='weekly', n_dates=None, countries=None):
     n_processes = os.cpu_count()
 
     dates = get_dates(chart, time_frame)
@@ -44,7 +44,7 @@ def run_charts_db(chart='Top 200', time_frame='weekly', n_dates=None):
                 sub_dates = dates[dates_per_pro * (pn - 1):]
             else:
                 sub_dates = dates[dates_per_pro * (pn - 1):dates_per_pro * pn]
-            p = Process(target=update_charts_db, args=(pn, db_queue, sub_dates, chart,))
+            p = Process(target=update_charts_db, args=(pn, db_queue, sub_dates, chart, countries))
             processes.append(p)
             print(f'Starting process {pn} with date {sub_dates[0]} to {sub_dates[-1]}')
             p.start()
@@ -56,14 +56,18 @@ def run_charts_db(chart='Top 200', time_frame='weekly', n_dates=None):
         print('Charts already up to date!')
 
 
-def update_charts_db(p, db_queue, dates, chart_name, time_frame='weekly'):
+def update_charts_db(p, db_queue, dates, chart_name, countries, time_frame='weekly'):
     country_meta = pd.read_csv('data/country_meta.csv')
 
     for i in range(len(dates)):
         date = dates[i]
+        if countries:
+            country_list = countries
+        else:
+            country_list = country_meta['country']
 
         print(f'{p}: Running date: {date} - {i+1} of {len(dates)}')
-        for country in country_meta['country']:
+        for country in country_list:
             country_name = country_meta[country_meta['country'] == country]['name'].iloc[0]
             if chart_name == 'Top 200':
                 top200 = format_charts_df(get_chart(date, country, country_name, 'Top 200', t200_url, time_frame))
@@ -124,25 +128,25 @@ def download_chart(date, country, url, time_frame, chart_name):
 
 
 def get_chart(date, country, country_name, chart_name, url, time_frame='weekly'):
-    try:
-        s_ts = time.time()
-        if time_frame == 'weekly':
-            if chart_name == 'Top 200':
-                date_str = f"{(pd.to_datetime(date) - timedelta(6)).strftime('%Y-%m-%d')}--{(pd.to_datetime(date) + timedelta(1)).strftime('%Y-%m-%d')}"
-            elif chart_name == 'Viral 50':
-                date_str = f"{pd.to_datetime(date).strftime('%Y-%m-%d')}--{pd.to_datetime(date).strftime('%Y-%m-%d')}"
-        elif time_frame == 'daily':
-            date_str = pd.to_datetime(date).strftime('%Y-%m-%d')
-        else:
-            raise TypeError('Invalid time_frame')
-        print(f'Downloading {chart_name} for {country_name}, {date}')
-        df = download_chart(date_str, country, url, time_frame, chart_name)
-        print(f'Downloaded {chart_name} for {country_name}, {date} - took %2.2f seconds' % (time.time() - s_ts))
-        df['date'] = date
-        df['country'] = country
-        return df
-    except:
-        print(f'Failed to download {chart_name} for {country_name}, {date}')
+    # try:
+    s_ts = time.time()
+    if time_frame == 'weekly':
+        if chart_name == 'Top 200':
+            date_str = f"{(pd.to_datetime(date) - timedelta(6)).strftime('%Y-%m-%d')}--{(pd.to_datetime(date) + timedelta(1)).strftime('%Y-%m-%d')}"
+        elif chart_name == 'Viral 50':
+            date_str = f"{pd.to_datetime(date).strftime('%Y-%m-%d')}--{pd.to_datetime(date).strftime('%Y-%m-%d')}"
+    elif time_frame == 'daily':
+        date_str = pd.to_datetime(date).strftime('%Y-%m-%d')
+    else:
+        raise TypeError('Invalid time_frame')
+    print(f'Downloading {chart_name} for {country_name}, {date}')
+    df = download_chart(date_str, country, url, time_frame, chart_name)
+    print(f'Downloaded {chart_name} for {country_name}, {date} - took %2.2f seconds' % (time.time() - s_ts))
+    df['date'] = date
+    df['country'] = country
+    return df
+    # except:
+    #     print(f'Failed to download {chart_name} for {country_name}, {date}')
 
 
 def get_dates(chart_name, time_frame):
