@@ -77,6 +77,7 @@ def get_layout(df):
                 ]),
                 dbc.Card([
                     dbc.CardBody([
+                        dcc.Markdown(open('README.md', 'r').read()),
                     ])
                 ]),
             ], width=6),
