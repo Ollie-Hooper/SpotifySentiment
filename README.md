@@ -2,7 +2,7 @@
   
 The aim of this project is to map and analyse the sentiments of different countries based on their music tastes over time.  
 The data is presented in a web app coded in Python using the [Plotly Dash](https://github.com/plotly/dash) package.  
-You can find a live version of the project [here]() and the source code is [here](https://github.com/Ollie-Hooper/SpotifySentiment).
+You can find a live version of the project [here](https://spotifysentiment.ollie-hooper.me) and the source code is [here](https://github.com/Ollie-Hooper/SpotifySentiment).
   
 ## How it works  
   
