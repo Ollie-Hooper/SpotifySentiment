@@ -26,7 +26,6 @@ def start_app():
         [Input('feature-dropdown', 'value'),
          Input('map-slider', 'value')]
     )
-    @time_method
     def update_map(feature, date_i):
         chart = 'Top 200'
         time_frame = 'weekly'
