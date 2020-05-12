@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 from dash.exceptions import PreventUpdate
 
-from app.functions import load_data, time_method, get_country_description
+from app.functions import load_data, get_country_description
 from app.graph import get_map_figure, get_country_features_dist, get_country_features_barchart, get_country_features_ts
 from app.layout import get_layout
 
