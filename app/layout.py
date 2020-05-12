@@ -66,7 +66,7 @@ def get_layout(df):
                                     max=len(df.date.unique()) - 1,
                                     value=len(df.date.unique()) - 1,
                                     marks={
-                                        i: df.date.unique()[i] for i in range(len(df.date.unique()) - 1, -1, -16)
+                                        i: df.date.unique()[i] for i in range(len(df.date.unique()) - 1, -1, -32)
                                     },
                                     included=False,
                                     updatemode='drag',
