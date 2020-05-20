@@ -128,25 +128,25 @@ def download_chart(date, country, url, time_frame, chart_name):
 
 
 def get_chart(date, country, country_name, chart_name, url, time_frame='weekly'):
-    # try:
-    s_ts = time.time()
-    if time_frame == 'weekly':
-        if chart_name == 'Top 200':
-            date_str = f"{(pd.to_datetime(date) - timedelta(6)).strftime('%Y-%m-%d')}--{(pd.to_datetime(date) + timedelta(1)).strftime('%Y-%m-%d')}"
-        elif chart_name == 'Viral 50':
-            date_str = f"{pd.to_datetime(date).strftime('%Y-%m-%d')}--{pd.to_datetime(date).strftime('%Y-%m-%d')}"
-    elif time_frame == 'daily':
-        date_str = pd.to_datetime(date).strftime('%Y-%m-%d')
-    else:
-        raise TypeError('Invalid time_frame')
-    print(f'Downloading {chart_name} for {country_name}, {date}')
-    df = download_chart(date_str, country, url, time_frame, chart_name)
-    print(f'Downloaded {chart_name} for {country_name}, {date} - took %2.2f seconds' % (time.time() - s_ts))
-    df['date'] = date
-    df['country'] = country
-    return df
-    # except:
-    #     print(f'Failed to download {chart_name} for {country_name}, {date}')
+    try:
+        s_ts = time.time()
+        if time_frame == 'weekly':
+            if chart_name == 'Top 200':
+                date_str = f"{(pd.to_datetime(date) - timedelta(6)).strftime('%Y-%m-%d')}--{(pd.to_datetime(date) + timedelta(1)).strftime('%Y-%m-%d')}"
+            elif chart_name == 'Viral 50':
+                date_str = f"{pd.to_datetime(date).strftime('%Y-%m-%d')}--{pd.to_datetime(date).strftime('%Y-%m-%d')}"
+        elif time_frame == 'daily':
+            date_str = pd.to_datetime(date).strftime('%Y-%m-%d')
+        else:
+            raise TypeError('Invalid time_frame')
+        print(f'Downloading {chart_name} for {country_name}, {date}')
+        df = download_chart(date_str, country, url, time_frame, chart_name)
+        print(f'Downloaded {chart_name} for {country_name}, {date} - took %2.2f seconds' % (time.time() - s_ts))
+        df['date'] = date
+        df['country'] = country
+        return df
+    except:
+        print(f'Failed to download {chart_name} for {country_name}, {date}')
 
 
 def get_dates(chart_name, time_frame):
